@@ -1,0 +1,136 @@
+<!doctype html>
+<HTML>
+<body>
+
+
+<style>
+
+	table {border-collapse: collapse;}
+	#ttt_table td {height:100px; width:100px; font-size:50px; font-weight: bold;}
+	.center {text-align:center;}
+	.marginauto {margin:auto;}
+	
+	
+	
+a:link, a:visited {
+    background-color: red;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: Green;
+}
+	
+	p {font-size:40px;float:both;color:gold;padding:5px;}
+	.floatR {float:right;padding:5px;}
+	
+	
+</style>
+
+
+
+
+<h1 class="center">Tic - Tac - Toe</h1>
+
+<table id="ttt_table"; class= "marginauto center";>
+
+	<tr>
+		<td id="pos1" onclick="ttt_click(1);" style="border-bottom:10px solid #000; border-right:10px solid #000;"></td>
+		<td id="pos2" onclick="ttt_click(2);" style="border-bottom:10px solid #000; border-right:10px solid #000;"></td>
+		<td id="pos3" onclick="ttt_click(3);" style="border-bottom:10px solid #000; "></td> 
+	</tr>
+	<tr>
+		
+		<td id="pos4" onclick="ttt_click(4);" style="border-bottom:10px solid #000; border-right:10px solid #000;"></td>
+		<td id="pos5" onclick="ttt_click(5);" style="border-bottom:10px solid #000; border-right:10px solid #000;"></td>
+		<td id="pos6" onclick="ttt_click(6);" style="border-bottom:10px solid #000; "></td> 
+	</tr>
+	<tr>
+		<td id="pos7" onclick="ttt_click(7);" style="border-right:10px solid #000;"></td>
+		<td id="pos8" onclick="ttt_click(8);" style="border-right:10px solid #000;"></td>
+		<td id="pos9" onclick="ttt_click(9);"></td> 
+	</tr>
+    
+</table>
+
+<h2 id="gameStat" class="center">It is X's Turn</h2>
+
+
+
+<script type="text/javascript">
+
+var isGameOver = false;
+var whoseTurn= 'X'; 
+
+var posArray =[false,false,false,false,false,false,false,false,false,false,false];
+			
+var winningSets = [
+		[1,2,3],
+		[4,5,6],
+		[7,8,9],
+		[1,4,7],
+		[2,5,8],
+		[3,6,9],
+		[1,5,9],
+		[3,5,7]
+				];
+				
+		function ttt_click(posClicked)
+{
+	if(isGameOver){
+		return;
+	}
+	
+	if(!posArray[posClicked])
+	{
+		posArray[posClicked]= whoseTurn;
+		document.getElementById('pos' + posClicked).innerHTML = whoseTurn;
+		checkForWin();
+	}  if(isGameOver)
+		{
+			document.getElementById("gameStat").innerHTML = whoseTurn + " Wins!";
+			return;
+		}
+		if(whoseTurn === "X")
+		{
+			document.getElementById("gameStat").innerHTML = "It\'s " + whoseTurn + " turn!";
+			whoseTurn = "O";
+		}	else
+			{
+				document.getElementById("gameStat").innerHTML = "It\'s " + whoseTurn + " turn!";
+				whoseTurn = "X";
+			}		
+				
+				
+}				
+				
+				
+				
+function checkForWin()
+{
+	for(var i = 0; i < 8; i++)
+	{
+		if(posArray[winningSets[i][0]])
+		{ if(posArray[winningSets[i][0]] == posArray[winningSets[i][1]] &&
+			 posArray[winningSets[i][0]] == posArray[winningSets[i][2]])
+			 {
+				isGameOver = true;
+			 }
+			 
+		}
+	}
+	return false;
+}
+
+	
+
+</script>
+
+
+</body>
+</HTML>
